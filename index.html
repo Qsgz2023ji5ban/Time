@@ -1,0 +1,88 @@
+<!--
+					   _ooOoo_
+					  o8888888o
+					  88" . "88
+					  (| -_- |)
+					  O\  =  /O
+				   ____/---\____
+				 .'  \\|     |//  '.
+				/  \\|||  :  |||//  \
+			   /  _||||| -:- |||||-  \
+			   |   | \\\  -  /// |   |
+			   | _|  ''---/''  |   |
+			   \  .-\__  `-`  ___/-. /
+			 ___`. .'  /--.--\  `. . __
+		  ."" '<  `.___\_<|>_/___.'  >'"".
+		 | | :  `- \.;`\ _ /';.\ - ` : | |
+		 \  \ `-.   \_ __\ /__ _/   .-\ /  /
+	======`-.____`-.___\_____/___.-`____.-'======
+					   `=---='
+	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+			 佛祖保佑       永无BUG
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="../assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择页面</title>
+    <style>
+        body {
+            background-image: url('background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        h1 {
+            color: white;
+            font-size: 36px; /* 更大一点 */
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        li {
+            margin-bottom: 20px; /* 增加间距 */
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold; /* 加粗链接文本 */
+            transition: color 0.3s ease; /* 添加过渡效果 */
+        }
+        a:hover {
+            color: #f8d800; /* 鼠标悬停时的颜色 */
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>数字表选择：</h1>
+    <ul>
+        <li><a href="time300.html">版本 3.0</a></li>
+        <li><a href="time350.html">版本 3.5</a></li>
+        <li><a href="time375ahtml">版本 3.75 主题1</a></li>
+        <li><a href="time375b.html">版本 3.75 主题2（推荐）</a></li>
+        <li><a href="./canary/">测试频道</a></li>
+    </ul>
+</body>
+</html>

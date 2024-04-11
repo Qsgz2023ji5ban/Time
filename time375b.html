@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>当前时间</title>
+	<link rel="shortcut icon" href="../assets/images/favicon.png">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=DM+Sans|Inter|Space+Mono|Work+Sans|Libre+Franklin&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background: url('background.png') no-repeat center center fixed;
+			background-size: cover;
+			margin: 0;
+			padding: 0;
+			font-family: 'Roboto', sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			color: #fff;
+		}
+
+		.container {
+			text-align: center;
+			animation: fadeIn 2s ease-in-out;
+		}
+
+		.time {
+			font-size: 6rem;
+			margin: 0;
+			animation: glow 1s ease-in-out infinite alternate;
+		}
+
+		.text {
+			font-size: 1.5rem;
+			margin-bottom: 20px;
+		}
+
+		.btn {
+			padding: 10px 25px;
+			margin: 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-weight: 500;
+		}
+
+		.btn:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		.controls {
+			margin-top: 30px;
+		}
+
+		.btn.fullscreen {
+			background-color: #fff;
+			color: #f44336;
+		}
+
+		/* 动画效果 */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes glow {
+			from {
+				text-shadow: 0 0 10px #222;
+			}
+
+			to {
+				text-shadow: 0 0 20px #000;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="text">当前时间：</div>
+		<div class="time" id="time"></div>
+		<div class="controls">
+			<select id="fontSelector" class="btn">
+				<option value="Roboto">Roboto</option>
+				<option value="微软雅黑">微软雅黑</option>
+				<option value="黑体">黑体</option>
+				<option value="宋体">宋体</option>
+				<!-- 新增的Google字体选项 -->
+				<option value="DM Sans">DM Sans</option>
+				<option value="Inter">Inter</option>
+				<option value="Space Mono">Space Mono</option>
+				<option value="Work Sans">Work Sans</option>
+				<option value="Libre Franklin">Libre Franklin</option>
+			</select>
+			<button class="btn" onclick="changeFontFamily()">更改字体</button>
+			<button class="btn" onclick="changeFontSize(-5)">减小字号</button>
+			<button class="btn" onclick="changeFontSize(5)">增大字号</button>
+			<button class="btn fullscreen" onclick="toggleFullScreen()">全屏/还原</button>
+		</div>
+	</div>
+
+	<script>
+		setInterval(() => {
+			const date = new Date();
+			const time = date.toLocaleTimeString('zh-CN', {
+				hour12: false
+			});
+			document.getElementById('time').textContent = time;
+		}, 1000);
+
+		function changeFontSize(change) {
+			const elements = document.querySelectorAll('.time');
+			elements.forEach(element => {
+				const currentSize = parseFloat(window.getComputedStyle(element).fontSize);
+				element.style.fontSize = `${currentSize + change}px`;
+			});
+		}
+
+		function changeFontFamily() {
+			const selectedFont = document.getElementById('fontSelector').value;
+			const elements = document.querySelectorAll('.time, .text');
+			elements.forEach(element => {
+				element.style.fontFamily = selectedFont;
+			});
+		}
+
+		function toggleFullScreen() {
+			if (!document.fullscreenElement) {
+				document.documentElement.requestFullscreen();
+			} else {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

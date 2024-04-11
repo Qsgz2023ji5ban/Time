@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Current Time</title>
+	<link rel="shortcut icon" href="../assets/images/favicon.png">
+	<style>
+		body {
+			background-image: url('background.png');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			margin: 0;
+			padding: 0;
+			font-family: "微软雅黑", sans-serif;
+		}
+
+		.time,
+		.text {
+			text-align: center;
+			color: white;
+		}
+
+		.time {
+			font-size: 250px;
+			margin-top: 5%;
+			animation: fadeIn 2s ease-in-out, glowText 1s ease-in-out infinite alternate;
+			transition: font-size 0.5s, color 0.5s;
+		}
+
+		.text {
+			font-size: 50px;
+			margin-top: 0%;
+			color: #bbbbbb;
+		}
+
+		.btn {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+			font-size: 14px;
+			margin: 5px;
+			border-radius: 4px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			transition: background-color 0.3s, box-shadow 0.3s;
+			animation: slideIn 0.5s ease-out;
+		}
+
+		.btn:hover {
+			background-color: #45a049;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		.btn:active {
+			animation: zoomIn 0.5s;
+		}
+
+		.controls {
+			text-align: center;
+		}
+
+		.btn.fullscreen {
+			background-color: white;
+			color: red;
+			animation: slideIn 0.5s ease-out;
+		}
+
+		/* 动画效果 */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes slideIn {
+			from {
+				transform: translateX(-100%);
+			}
+
+			to {
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes zoomIn {
+			from {
+				transform: scale(0.6);
+			}
+
+			to {
+				transform: scale(1);
+			}
+		}
+
+		@keyframes glowText {
+			from {
+				text-shadow: 0 0 10px #fff;
+			}
+
+			to {
+				text-shadow: 0 0 20px #000;
+			}
+		}
+	</style>
+	<script>
+		// 每秒更新时间
+		setInterval(() => {
+			const date = new Date();
+			// 设置为24小时制
+			const time = date.toLocaleTimeString('en-US', {
+				hour12: false
+			});
+			document.querySelector('.time').textContent = time;
+		}, 1000);
+
+
+		// JavaScript 函数，用于更改字号
+		function changeFontSize(change) {
+			const elements = document.querySelectorAll('.time'); // 只影响.time和.text
+			elements.forEach(element => {
+				const currentSize = parseFloat(window.getComputedStyle(element).fontSize);
+				const newSize = currentSize + change;
+				element.style.fontSize = newSize + 'px';
+			});
+		}
+
+		// JavaScript 函数，用于更改字体
+		function changeFontFamily() {
+			const selectedFont = document.getElementById('fontSelector').value;
+			const elements = document.querySelectorAll('.time, .text'); // 只影响.time和.text
+			elements.forEach(element => {
+				element.style.fontFamily = selectedFont;
+			});
+		}
+
+		// JavaScript 函数，用于全屏和还原
+		function toggleFullScreen() {
+			if (!document.fullscreenElement) {
+				document.documentElement.requestFullscreen();
+			} else {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+				}
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="text">
+		<p>当前时间：</p>
+	</div>
+	<div class="time"></div>
+
+	<!-- 控制区域 -->
+	<div class="controls">
+		<!-- 添加字体选择下拉菜单 -->
+		<select id="fontSelector" class="btn">
+			<option value="微软雅黑">微软雅黑</option>
+			<option value="黑体">黑体</option>
+			<option value="宋体">宋体</option>
+			<!-- 添加更多字体选项 -->
+		</select>
+
+		<!-- 添加按钮 -->
+		<button class="btn" onclick="changeFontFamily()">更改字体</button>
+		<button class="btn" onclick="changeFontSize(-10)">减小字号</button>
+		<button class="btn" onclick="changeFontSize(10)">增大字号</button>
+		<button class="btn fullscreen" onclick="toggleFullScreen()">全屏/还原</button>
+	</div>
+</body>
+
+</html>
+</body>
+
+</html>
